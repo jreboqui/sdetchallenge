@@ -1,9 +1,10 @@
-import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import pageObjects.GameBoardPage;
+
 import java.time.Duration;
 
 
@@ -18,13 +19,11 @@ public class App extends BaseApp {
        initializeChromeDriver();
        goToUrl();
 
-       int[] arr = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-       int low = arr[0];
-       int high = arr[arr.length-1];
-       int mid = arr[arr.length/2];
+       GameBoardPage gameBoardPage = new GameBoardPage(driver);
+
+       gameBoardPage.start(); 
        
-        //List<WebElement> listOfBoxes = driver.findElements(By.xpath("//button[contains(@id,'coin')]"));
-       
+       System.out.println("End of program");
         // for (int i = 0; i < arr.length; i++) {
         //     //Get the input box
         //     if (i < mid) {
@@ -56,18 +55,16 @@ public class App extends BaseApp {
         // while (!found) {
         //     found = recursiveSplitAndWeigh();
         // }
-        recursiveSplitAndWeigh(arr, low, high, mid);
+      //  recursiveSplitAndWeigh(arr, low, high, mid);
 
         
         
-        //Get the weighings
-        List<WebElement> weighings = driver.findElements(By.xpath("//div[@class='game-info']//li"));
-        //Print the weighings
-        for (WebElement weighing : weighings) {
-            System.out.println(weighing.getText());
-        }
-
-         System.out.println("End of program");
+        // //Get the weighings
+        // List<WebElement> weighings = driver.findElements(By.xpath("//div[@class='game-info']//li"));
+        // //Print the weighings
+        // for (WebElement weighing : weighings) {
+        //     System.out.println(weighing.getText());
+        // }
     }
 
     public static void recursiveSplitAndWeigh(int[] arr, int low, int high, int mid) throws InterruptedException{
