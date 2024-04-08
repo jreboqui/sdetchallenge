@@ -37,11 +37,7 @@ public class GameBoardPage {
     public void start(){
         init();
 
-        try {
-            answer = recursiveSplitAndWeigh(initialLow, initialHigh, coinsComponent.getNumOfCoins());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        answer = recursiveSplitAndWeigh(initialLow, initialHigh, coinsComponent.getNumOfCoins());
 
         outputListOfWeighings();
 
@@ -64,6 +60,9 @@ public class GameBoardPage {
         //get the message from the alert
         System.out.println(driver.switchTo().alert().getText());
 
+        //output the winning number one last time
+        System.out.println("The fake gold bar is: " + answer);
+
     }
 
     //The answer is returned by the recursive weighing at the end
@@ -72,6 +71,9 @@ public class GameBoardPage {
     }
 
     private void outputListOfWeighings() {
+       System.out.println("//**********************************************//");
+       System.out.println("//   The following weighings are displayed      //");
+       System.out.println("//**********************************************//");
        for (WebElement weighing : weighingsComponent.getWeighingList()){
             System.out.println(weighing.getText());
        }
@@ -82,8 +84,8 @@ public class GameBoardPage {
         initialHigh = coinsComponent.getNumOfCoins()-1; 
     }
 
-    private int recursiveSplitAndWeigh(int low, int high, int numOfCoins) throws InterruptedException{
-        System.out.println("In recursive start, n is: " + numOfCoins);
+    private int recursiveSplitAndWeigh(int low, int high, int numOfCoins){
+
         if (numOfCoins <= 1) return low;
 
         int mid = (numOfCoins == 2) ? low : (low+high)/2;

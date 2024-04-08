@@ -1,5 +1,5 @@
 
-# Fetch SDET Challenge 
+# Fetch SDET Challenge
 
 Automation written in Java utilizing Selenium framework to play the challenge game and output the result
 
@@ -17,7 +17,7 @@ To check your version of Java, open a terminal and type
   java --version
 ```
 
-Selenium dependencies and the latest version of chromedriver are included in the repo.    
+Selenium dependencies and the latest version of chromedriver are included in the repo.
 
 Download and install Maven (follow installation guide like this https://www.baeldung.com/install-maven-on-windows-linux-mac)
 
@@ -32,7 +32,7 @@ Clone the project
   git clone https://github.com/jreboqui/sdetchallenge.git
 ```
 
-Import the project folder in vscode or your favorite IDE.
+Import the project folder in vscode or your favorite IDE. Make sure that chromedriver is pointing to the correct file directory. See BaseApp.java line 8
 
 ```bash
  Run the main class in App.java
@@ -47,6 +47,47 @@ mvn clean install
 ```
 Once the build is complete (should see BUILD SUCCESS), go to the target folder and run
 
-```bash
+```java
 java -jar sdetchallenge-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
+The program should start and open up a chrome browser, go to the challenge url, and start playing the game
+
+
+## Structure Documentation and How it works
+
+Using page object model pattern, the page for the challenge http://sdetchallenge.fetch.com/ is represented as GameBoardPage.java
+
+All the elements on the screen that users can interact with are segregated by using components. In essence, the GameBoardPage contains the components and calls them for actions/command when needed.
+
+PageObjects:
+```bash
+    GameBoardPage.java
+```
+Components(see screenshots):
+
+```bash
+    CoinsComponent.java
+    WeighingScaleComponent.java
+    WeighingsComponent.java
+```
+
+The GameBoardPage.start() is responsible for initializing some parameters such as the number of coins/bars we have and setting what is the initial low and initial high values(needed for the algorithm). It is also responsible for outputing the list of weighings and clicking the correct fake gold bar number once the algorithm is done.
+
+
+The algorithm to help us determine what is the fake gold bar is called recursively in **recursiveSplitAndWeigh** method. Basically the algorithm goes like this:
+```bash
+    Determine if we have odd or even number of bars
+    Get the middle value of the bars
+    If it's even then
+        Weigh the bars on the left and right excluding the middle
+    If it's not even then 
+        Weigh the bars up to the middle on the left bowl, and
+        the bars right of the middle bar on the right bowl
+ 
+    If left and right are equal, then the mid bar is the fake one
+    Otherwise, select the lighter group of bars and repeat
+     the  algorithm until you get the correct one
+```
+
+
+
