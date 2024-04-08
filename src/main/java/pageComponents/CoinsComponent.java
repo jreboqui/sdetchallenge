@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.WebElement;
 
-public class CoinsComponent {
+public class CoinsComponent extends BaseComponent{
 
     WebDriver driver;
 
@@ -17,8 +16,7 @@ public class CoinsComponent {
     List<WebElement> listOfCoins;
 
     public CoinsComponent(WebDriver driver){
-         this.driver = driver;
-         PageFactory.initElements(driver, this);
+         super(driver);
     }
 
     public void setCoins() {
@@ -28,10 +26,6 @@ public class CoinsComponent {
     public int getNumOfCoins() {
         return numOfCoins;
     }
-
-    // public int[] getCoinsArray() {
-    //    return coinsArray;
-    // }
 
     public void clickOnCoin(int answer) {
         listOfCoins.get(answer).click();
