@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class BaseApp {
 
     static final String CHALLENGE_URL = "http://sdetchallenge.fetch.com/";
+    //PLEASE UPDATE THE CHROMEDRIVER_DIRECTORY to your local directory where chromedriver is saved
     static final String CHROMEDRIVER_DIRECTORY = "C:\\Users\\Rai\\Desktop\\sdetTest\\sdetChallenge\\chromeDriver\\chromedriver.exe";
     public static WebDriver driver;
     

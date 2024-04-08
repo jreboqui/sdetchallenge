@@ -2,7 +2,6 @@ package pageObjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pageComponents.CoinsComponent;
@@ -10,9 +9,6 @@ import pageComponents.WeighingScaleComponent;
 import pageComponents.WeighingsComponent;
 
 public class GameBoardPage {
-
-    @FindBy(id = "weigh")
-    WebElement weighButton;
 
     WebDriver driver;
 
@@ -86,20 +82,24 @@ public class GameBoardPage {
 
     private int recursiveSplitAndWeigh(int low, int high, int numOfCoins){
 
+        //Returning what is set to low because that is the answer once numOfCoins is less than 2
         if (numOfCoins <= 1) return low;
 
+        //When you have only two coins/bars left to weigh, you need to bump mid and high
         int mid = (numOfCoins == 2) ? low : (low+high)/2;
         high = (numOfCoins == 2) ? mid+1: high;
         
         clearWeighBowls();
         
         weighingScaleComponent.enterValuesAndWeigh(low, high, mid, numOfCoins);
-       
+
+        //At this point, the coins we need to check will be split into half
         numOfCoins = numOfCoins/2;        
 
        
         //click on the weigh button
-        weighButton.click();
+        clickWeighButton();
+
         //get the result and check which weighs less
         String result = checkResult();
 
@@ -112,6 +112,10 @@ public class GameBoardPage {
             //Call recursive function with second half
              return recursiveSplitAndWeigh(mid+1, high, numOfCoins);
         }
+    }
+
+    private void clickWeighButton() {
+        weighingScaleComponent.clickWeighButton();
     }
 
     private void clearWeighBowls() {
