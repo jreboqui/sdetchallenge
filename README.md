@@ -10,7 +10,7 @@ Automation written in Java utilizing Selenium framework to play the challenge ga
 
 Prereq:
 
-Must be running Java 11 and the latest version of Chrome browser. Java 11 installation guide can be found here.
+Must be running Java 11 and the latest version of Chrome browser. Java 11 installation guide can be found here https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk.
 
 To check your version of Java, open a terminal and type
 ```bash
