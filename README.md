@@ -76,7 +76,8 @@ The GameBoardPage.start() is responsible for initializing some parameters such a
 
 
 The algorithm to help us determine what is the fake gold bar is called recursively in **recursiveSplitAndWeigh** method. Basically the algorithm goes like this:
-```bash
+```
+
     Determine if we have odd or even number of bars
     Get the middle value of the bars
     If it's even then
