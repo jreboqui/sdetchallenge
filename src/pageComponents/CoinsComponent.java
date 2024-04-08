@@ -11,8 +11,7 @@ public class CoinsComponent {
 
     WebDriver driver;
 
-    int numOfCoins;
-    int[] coinsArray; //array representation of the coins
+    private int numOfCoins;
 
     @FindBy(xpath = "//button[contains(@id,'coin')]")   
     List<WebElement> listOfCoins;
@@ -24,19 +23,15 @@ public class CoinsComponent {
 
     public void setCoins() {
         numOfCoins = listOfCoins.size();
-        coinsArray = new int[numOfCoins];
-        for (int i = 0; i < numOfCoins; i++){
-            coinsArray[i] = i;
-        }
     }
 
     public int getNumOfCoins() {
         return numOfCoins;
     }
 
-    public int[] getCoinsArray() {
-       return coinsArray;
-    }
+    // public int[] getCoinsArray() {
+    //    return coinsArray;
+    // }
 
     public void clickOnCoin(int answer) {
         listOfCoins.get(answer).click();

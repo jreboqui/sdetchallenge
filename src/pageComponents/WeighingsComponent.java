@@ -22,7 +22,4 @@ public class WeighingsComponent extends BaseComponent{
     public WebElement getLastWeigh() {
         return weighingList.get(weighingList.size()-1);
     }
-
- 
-
 }
