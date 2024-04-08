@@ -11,7 +11,6 @@ public class WeighingsComponent extends BaseComponent{
     @FindBy(xpath = "//div[@class='game-info']//li")   
     List<WebElement> weighingList;
 
-    // List<WebElement> weighings = driver.findElements(By.xpath(""));
     public WeighingsComponent(WebDriver driver) {
         super(driver);
     }

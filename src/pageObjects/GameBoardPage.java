@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pageComponents.CoinsComponent;
+import pageComponents.WeighingScaleComponent;
 import pageComponents.WeighingsComponent;
 
 public class GameBoardPage {
@@ -23,10 +24,10 @@ public class GameBoardPage {
     WebElement resultElement;
 
     WebDriver driver;
-    WebElement inputBox = null;
 
     CoinsComponent coinsComponent;
     WeighingsComponent weighingsComponent;
+    WeighingScaleComponent weighingScaleComponent;
 
     private int initialLow;
     private int initialHigh;
@@ -38,6 +39,8 @@ public class GameBoardPage {
         PageFactory.initElements(driver, this);
         coinsComponent = new CoinsComponent(driver);
         weighingsComponent = new WeighingsComponent(driver);
+        weighingScaleComponent = new WeighingScaleComponent(driver);
+
     }
 
 
@@ -57,8 +60,15 @@ public class GameBoardPage {
 
         outputListOfWeighings();
 
-        System.out.println("Answer is: " + answer);
-        //selectCorrectAnswer();
+        selectCorrectAnswer();
+
+        verifyWinnerMessage();
+
+    }
+
+    private void verifyWinnerMessage() {
+        //get the message from the alert
+        System.out.println(driver.switchTo().alert().getText());
 
     }
 
@@ -68,7 +78,6 @@ public class GameBoardPage {
         coinsComponent.clickOnCoin(answer);
 
     }
-
 
 
     private void outputListOfWeighings() {
@@ -160,27 +169,12 @@ public class GameBoardPage {
         clearWeighBowls.click();
         Thread.sleep(5000);
 
-         for (int i = low; i <= high; i++) {
-            //Get the input box
-            if (numOfCoins % 2 != 0 || numOfCoins < 2) {
-                if (i < mid) {
-                    inputBox = driver.findElement(By.id("left_" + arr[i]));
-                    inputBox.sendKeys(String.valueOf(i));
-                } else if (i > mid){
-                    inputBox = driver.findElement(By.id("right_" + arr[i]));
-                    inputBox.sendKeys(String.valueOf(i));
-                } 
-            } else {
-                if (i <= mid) {
-                    inputBox = driver.findElement(By.id("left_" + arr[i]));
-                    inputBox.sendKeys(String.valueOf(i));
-                } else {
-                    inputBox = driver.findElement(By.id("right_" + arr[i]));
-                    inputBox.sendKeys(String.valueOf(i));
-                } 
-            }
-           
-        }
+        weighingScaleComponent.enterValuesAndWeigh(arr, low, high, mid, numOfCoins);
+
+        //This is where the for loop used to be//
+
+        //end of for loop
+       
         numOfCoins = numOfCoins/2;        
 
        
