@@ -70,7 +70,8 @@ Components(see screenshots):
     WeighingScaleComponent.java
     WeighingsComponent.java
 ```
-
+![component1_screenshot](https://github.com/jreboqui/sdetchallenge/assets/19766843/82e1a799-ac7b-4078-acb0-516b5e020eb0)
+![component2_screenshot2](https://github.com/jreboqui/sdetchallenge/assets/19766843/54370034-6aa2-413f-8cd4-17facb683912)
 The GameBoardPage.start() is responsible for initializing some parameters such as the number of coins/bars we have and setting what is the initial low and initial high values(needed for the algorithm). It is also responsible for outputing the list of weighings and clicking the correct fake gold bar number once the algorithm is done.
 
 

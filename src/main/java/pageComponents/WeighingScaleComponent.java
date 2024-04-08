@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WeighingScaleComponent extends BaseComponent {
 
-    WebElement inputBox = null;
-
     public WeighingScaleComponent(WebDriver driver) {
         super(driver);
     }
@@ -26,15 +24,21 @@ public class WeighingScaleComponent extends BaseComponent {
     @FindBy(xpath = "//div[@class='result']/button[@id='reset']")
     WebElement resultElement;
 
+    @FindBy(id = "weigh")
+    WebElement weighButton;
+
     @FindBy(xpath = "//button[contains(text(),'Reset')]")
     WebElement clearWeighBowlsButton;
 
-    //poll every .5 seconds for 5 seconds until condition is met
+
+
+    //poll every .5 seconds for 10 seconds until condition is met
     WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
     
     public void enterValuesAndWeigh(int low, int high, int mid, int numOfCoins) {
          for (int i = low; i <= high; i++) {
-            //Get the input box
+            //Loop through low to mid or mid-1 and put them in the left bowl
+             // once i is greater than mid, the bars should be put in the right bowl
             if (numOfCoins % 2 != 0) {
                 if (i < mid) {
                     leftBowl.get(i).sendKeys(String.valueOf(i));
@@ -51,6 +55,10 @@ public class WeighingScaleComponent extends BaseComponent {
         }
     }
 
+    //After clicking the weigh button, it takes a few seconds before the
+    //actal result appears. We need to wait for the result status to change
+    //from '?' to one of the three '=', '<', '>'
+    //This is handled by waitForBoardToGenerateResult
     public String getResult(){
         waitForBoardToGenerateResult();
         return resultElement.getAttribute("innerText");
@@ -72,5 +80,7 @@ public class WeighingScaleComponent extends BaseComponent {
     }
 
 
-    
+    public void clickWeighButton() {
+        weighButton.click();
+    }
 }
